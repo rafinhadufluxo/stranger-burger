@@ -1,4 +1,4 @@
-# stranger-burger
+# stranger burger
 
 ## Project setup
 ```
@@ -20,5 +20,7 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Compile configuration Api in terminal II (that is, open another terminal and compile inside the directory)
+```
+npm run backend
+```

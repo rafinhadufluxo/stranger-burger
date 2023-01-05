@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p>Componente de Mensagem</p>
+    <Mensagem :msg="msg" v-show="msg" />
     <div>
-      <form id="burger-form">
+      <form id="burger-form" @submit="createBurger">
         <div class="input-container">
           <label for="name">Nome do Cliente</label>
           <input
@@ -58,14 +58,17 @@
 </template>
 
 <script>
+import Mensagem from "@/components/Mensagem.vue";
+
 export default {
   name: "BurgerForm",
+
   data() {
     return {
       paes: null,
       carnes: null,
       opcionaisdata: null,
-      nome: null,
+      name: null,
       pao: null,
       carne: null,
       opcionais: [],
@@ -82,9 +85,10 @@ export default {
       this.opcionaisdata = data.opcionais;
     },
     async createBurger(e) {
+      // irei solicitar, ou melhor, os dados dos meu pedido (lanche)
       e.preventDefault();
       const data = {
-        nome: this.nome,
+        name: this.name,
         carne: this.carne,
         pao: this.pao,
         opcionais: Array.from(this.opcionais),
@@ -99,10 +103,11 @@ export default {
       const res = await req.json();
       console.log(res);
       this.msg = "Pedido realizado com sucesso!";
+      /*  this.msg = `Pedido Nº ${res.id} realizado com sucesso!`; */
       // clear message
       setTimeout(() => (this.msg = ""), 3000);
       // limpar campos
-      this.nome = "";
+      this.name = "";
       this.carne = "";
       this.pao = "";
       this.opcionais = [];
@@ -111,9 +116,9 @@ export default {
   mounted() {
     this.getIngredientes();
   },
-  /* components: {
-    Message
-  }, */
+  components: {
+    Mensagem,
+  },
 };
 </script>
 
